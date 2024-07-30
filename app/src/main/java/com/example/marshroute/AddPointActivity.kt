@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 class AddPointActivity : AppCompatActivity() {
 
     private lateinit var editTextName: EditText
+    private lateinit var editTextCity: EditText
     private lateinit var editTextAddress: EditText
+    private lateinit var editTextClient: EditText
     private lateinit var editTextDescription: EditText
     private lateinit var buttonSave: Button
     private lateinit var dbManager: DatabaseManager
@@ -19,22 +21,26 @@ class AddPointActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_point)
 
         editTextName = findViewById(R.id.editTextName)
+        editTextCity = findViewById(R.id.editTextCity)
         editTextAddress = findViewById(R.id.editTextAddress)
+        editTextClient = findViewById(R.id.editTextClient)
         editTextDescription = findViewById(R.id.editTextDescription)
         buttonSave = findViewById(R.id.buttonSave)
         dbManager = DatabaseManager(this)
 
         buttonSave.setOnClickListener {
             val name = editTextName.text.toString()
+            val city = editTextCity.text.toString()
             val address = editTextAddress.text.toString()
+            val client = editTextClient.text.toString()
             val description = editTextDescription.text.toString()
 
             if (name.isNotEmpty() && address.isNotEmpty()) {
-                dbManager.addRoutePoint(name, address, description)
-                Toast.makeText(this, "Point added", Toast.LENGTH_SHORT).show()
+                dbManager.addRoutePoint(name, city, address, client, description)
+                Toast.makeText(this, "Точка додана", Toast.LENGTH_SHORT).show()
                 finish()
             } else {
-                Toast.makeText(this, "Name and address are required", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Назва та адреса обовязкова!", Toast.LENGTH_SHORT).show()
             }
         }
     }

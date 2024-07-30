@@ -12,10 +12,22 @@
         android:hint="Name"/>
 
     <EditText
+        android:id="@+id/editTextCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Назва міста" />
+
+    <EditText
         android:id="@+id/editTextAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Address"/>
+
+    <EditText
+        android:id="@+id/editTextClient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Імя клієнта" />
 
     <EditText
         android:id="@+id/editTextDescription"

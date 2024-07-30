@@ -5,10 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.EditText
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
+import android.widget.Toast
 
 class EditPointsActivity : AppCompatActivity() {
 
@@ -20,6 +22,11 @@ class EditPointsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_points)
+
+        dbManager = DatabaseManager(this)
+        val dbPath = dbManager.getDatabasePath()
+
+        Toast.makeText(this, dbPath, Toast.LENGTH_SHORT).show()
 
         listViewPoints = findViewById(R.id.listView_points)
         dbManager = DatabaseManager(this)
@@ -53,7 +60,9 @@ class EditPointsActivity : AppCompatActivity() {
             Point(
                 id = it.id,
                 name = it.name,
+                city = it.city,
                 address = it.address,
+                client = it.client,
                 description = it.description
             )
         }
