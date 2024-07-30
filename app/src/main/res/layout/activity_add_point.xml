@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -8,36 +9,37 @@
     <EditText
         android:id="@+id/editTextName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Назва точки" />
+        android:layout_height="57dp"
+        android:hint="Назва точки *" />
 
     <EditText
         android:id="@+id/editTextCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Назва міста" />
+        android:hint="Назва міста *" />
 
     <EditText
         android:id="@+id/editTextAddress"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Адреса Google Maps" />
+        android:layout_height="57dp"
+        android:hint="Адреса Google Maps (вулиця) *"
+        android:textColor="@color/design_default_color_on_primary" />
 
     <EditText
         android:id="@+id/editTextClient"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Імя клієнта" />
+        android:hint="Імя клієнта (необов'зково)" />
 
     <EditText
         android:id="@+id/editTextDescription"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="57dp"
         android:hint="Опис (необов'язково)" />
 
     <Button
         android:id="@+id/buttonSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="221dp"
+        android:layout_height="59dp"
         android:text="Зберегти" />
 </LinearLayout>

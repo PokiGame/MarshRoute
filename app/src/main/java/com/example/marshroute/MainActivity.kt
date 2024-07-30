@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity() {
 
     private lateinit var buttonAddPoint: Button
-    private lateinit var buttonViewPoints: Button
     private lateinit var buttonEditPoints: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,5 +1,7 @@
 package com.example.marshroute
 
+import android.util.Log
+
 data class Point(
     val id: Long,
     val name: String,
@@ -10,6 +12,12 @@ data class Point(
 
 ) {
     override fun toString(): String {
-        return "$name, $city, $address, $client, $description"
+        var clienttemp: String = client
+        var descriptiontemp: String = description
+        if (client.isNotEmpty()){ clienttemp = ", " + client }
+        if (description.isNotEmpty()){ descriptiontemp = ", " + description }
+        Log.d("EditPointDetailsActivity", client.toString())
+        Log.d("EditPointDetailsActivity", description.toString())
+        return "$name, $city, $address$clienttemp$descriptiontemp"
     }
 }

@@ -28,6 +28,7 @@ class AddPointActivity : AppCompatActivity() {
         buttonSave = findViewById(R.id.buttonSave)
         dbManager = DatabaseManager(this)
 
+
         buttonSave.setOnClickListener {
             val name = editTextName.text.toString()
             val city = editTextCity.text.toString()
@@ -35,12 +36,12 @@ class AddPointActivity : AppCompatActivity() {
             val client = editTextClient.text.toString()
             val description = editTextDescription.text.toString()
 
-            if (name.isNotEmpty() && address.isNotEmpty()) {
+            if (name.isNotEmpty() && address.isNotEmpty() && city.isNotEmpty()) {
                 dbManager.addRoutePoint(name, city, address, client, description)
                 Toast.makeText(this, "Точка додана", Toast.LENGTH_SHORT).show()
                 finish()
             } else {
-                Toast.makeText(this, "Назва та адреса обовязкова!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Назва, місто та адреса обовязкова!", Toast.LENGTH_SHORT).show()
             }
         }
     }
