@@ -1,13 +1,16 @@
 package com.example.marshroute
 
+import com.example.marshroute.DatabaseManager.Point
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 
 class SelectPointsActivity : AppCompatActivity() {
-
+    private lateinit var editPointLauncher: ActivityResultLauncher<Intent>
     private lateinit var dbManager: DatabaseManager
     private lateinit var listViewPoints: ListView
     private lateinit var adapter: ArrayAdapter<Point>
