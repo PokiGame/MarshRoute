@@ -5,18 +5,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import android.widget.EditText
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
+import com.google.firebase.firestore.FirebaseFirestore
 
 class EditPointsActivity : AppCompatActivity() {
 
     private lateinit var listViewPoints: ListView
     private lateinit var dbManager: DatabaseManager
-    private lateinit var adapter: ArrayAdapter<Point> // Змінено на ArrayAdapter<Point>
+    private lateinit var adapter: ArrayAdapter<DatabaseManager.Point> // Змінено на ArrayAdapter<DatabaseManager.Point>
     private lateinit var editPointLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,12 +24,7 @@ class EditPointsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit_points)
 
         dbManager = DatabaseManager(this)
-        val dbPath = dbManager.getDatabasePath()
-
-        Toast.makeText(this, dbPath, Toast.LENGTH_SHORT).show()
-
         listViewPoints = findViewById(R.id.listView_points)
-        dbManager = DatabaseManager(this)
 
         // Ініціалізуємо editPointLauncher
         editPointLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -52,29 +47,11 @@ class EditPointsActivity : AppCompatActivity() {
     }
 
     private fun refreshPointsList() {
-        // Отримуємо всі точки з dbManager
-        val dbPoints = dbManager.getAllRoutePoints()
-
-        // Конвертуємо DatabaseManager.Point у ваш Point
-        val points = dbPoints.map {
-            Point(
-                id = it.id,
-                name = it.name,
-                city = it.city,
-                address = it.address,
-                client = it.client,
-                description = it.description
-            )
+        dbManager.getAllRoutePoints { points ->
+            // Оновлюємо адаптер
+            adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, points)
+            listViewPoints.adapter = adapter
+            adapter.notifyDataSetChanged()
         }
-
-        // Оновлюємо адаптер
-        adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, points)
-        listViewPoints.adapter = adapter
-        adapter.notifyDataSetChanged()
-    }
-
-
-    companion object {
-        private const val REQUEST_EDIT_POINT = 1
     }
 }
