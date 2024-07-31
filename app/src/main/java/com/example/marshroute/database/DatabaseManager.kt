@@ -1,20 +1,23 @@
-package com.example.marshroute
+package com.example.marshroute.database
 
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class DatabaseManager(context: Context) {
-    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private val collection = db.collection("RoutePoints")
+    val db = Firebase.firestore
+    val collection = db.collection("RoutePoints")
 
     companion object {
-        private const val TAG = "DatabaseManager"
+        private const val TAG = "DatabaseManager" //hyi
     }
 
     // Додати нову точку маршруту
     fun addRoutePoint(name: String, city: String, address: String, client: String, description: String) {
+        Log.d(TAG, "addRoutePoint")
         val point = hashMapOf(
             "name" to name,
             "city" to city,
@@ -33,6 +36,7 @@ class DatabaseManager(context: Context) {
 
     // Отримати всі точки маршруту
     fun getAllRoutePoints(onResult: (List<Point>) -> Unit) {
+        Log.d(TAG, "getAllRoutePoints")
         collection.get()
             .addOnSuccessListener { result ->
                 val pointsList = mutableListOf<Point>()
@@ -50,6 +54,7 @@ class DatabaseManager(context: Context) {
 
     // Отримати точку маршруту за ID
     fun getRoutePoint(id: String, onResult: (Point?) -> Unit) {
+        Log.d(TAG, "getRoutePoint")
         collection.document(id).get()
             .addOnSuccessListener { document ->
                 if (document != null) {
@@ -68,6 +73,7 @@ class DatabaseManager(context: Context) {
 
     // Оновити точку маршруту
     fun updateRoutePoint(id: String, name: String, city: String, address: String, client: String, description: String) {
+        Log.d(TAG, "updateRoutePoint")
         val point = hashMapOf(
             "name" to name,
             "city" to city,
@@ -86,6 +92,7 @@ class DatabaseManager(context: Context) {
 
     // Видалити точку маршруту
     fun deleteRoutePoint(id: String) {
+        Log.d(TAG, "deleteRoutePoint")
         collection.document(id).delete()
             .addOnSuccessListener {
                 Log.d(TAG, "DocumentSnapshot successfully deleted!")

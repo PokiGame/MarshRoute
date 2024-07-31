@@ -37,7 +37,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.androidx.sqlite)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

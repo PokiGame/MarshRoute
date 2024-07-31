@@ -9,8 +9,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
-import android.widget.Toast
-import com.google.firebase.firestore.FirebaseFirestore
+import com.example.marshroute.database.DatabaseManager
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class EditPointsActivity : AppCompatActivity() {
 
@@ -21,6 +22,8 @@ class EditPointsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val db = Firebase.firestore
+        val collection = db.collection("RoutePoints")
         setContentView(R.layout.activity_edit_points)
 
         dbManager = DatabaseManager(this)

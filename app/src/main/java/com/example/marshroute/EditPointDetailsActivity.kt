@@ -1,12 +1,12 @@
 package com.example.marshroute
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.marshroute.database.DatabaseManager
 
 class EditPointDetailsActivity : AppCompatActivity() {
     private lateinit var editTextName: EditText

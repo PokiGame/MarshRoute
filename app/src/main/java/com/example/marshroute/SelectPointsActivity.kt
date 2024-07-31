@@ -5,8 +5,8 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.example.marshroute.database.DatabaseManager
 
 class SelectPointsActivity : AppCompatActivity() {
     private lateinit var editPointLauncher: ActivityResultLauncher<Intent>
@@ -16,7 +16,7 @@ class SelectPointsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_select_points)
+        setContentView(R.layout.activity_edit_points)
 
         listViewPoints = findViewById(R.id.listView_points)
         dbManager = DatabaseManager(this)
