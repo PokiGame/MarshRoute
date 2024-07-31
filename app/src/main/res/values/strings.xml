@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MarshRoute</string>
+    <string name="add_button_description">Додати</string>
 </resources>
