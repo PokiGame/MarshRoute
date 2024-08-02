@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">MarshRoute</string>
     <string name="add_button_description">Додати</string>
+    <string name="clientNameText">Імя клієнта (необов\'зково)</string>
+    <string name="addressGoogleText">Адреса Google Maps, вулиця (необов\'зково)</string>
+    <string name="coordinatesGoogleText">Координати Google Maps *</string>
+    <string name="cityNameText">Назва міста *</string>
+    <string name="pointNameText">Назва *</string>
+    <string name="descriptionText">Опис (необов\'язково)</string>
+    <string name="saveText">Зберегти</string>
+    <string name="deleteText">Видалити</string>
+    <string name="pointEditText">Редагувати точки</string>
+    <string name="doMarshrouteText">Проложити маршрут</string>
+    <string name="pointAddText">+</string>
 </resources>

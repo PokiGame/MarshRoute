@@ -9,42 +9,56 @@
         android:id="@+id/editTextName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Name"/>
+        android:autofillHints=""
+        android:hint="@string/pointNameText"/>
 
     <EditText
         android:id="@+id/editTextCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Назва міста" />
+        android:autofillHints=""
+        android:hint="@string/cityNameText" />
+
+    <EditText
+        android:id="@+id/editTextCoordinates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:hint="@string/coordinatesGoogleText" />
 
     <EditText
         android:id="@+id/editTextAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Address"/>
+        android:autofillHints=""
+        android:hint="@string/addressGoogleText"/>
 
     <EditText
         android:id="@+id/editTextClient"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Імя клієнта" />
+        android:autofillHints=""
+        android:hint="@string/clientNameText" />
 
     <EditText
         android:id="@+id/editTextDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Description"/>
+        android:autofillHints=""
+        android:hint="@string/descriptionText"/>
 
     <Button
         android:id="@+id/buttonSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"/>
+        android:autofillHints=""
+        android:text="@string/saveText"/>
 
     <Button
         android:id="@+id/buttonDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Видалити" />
+        android:autofillHints=""
+        android:text="@string/deleteText" />
 
 </LinearLayout>

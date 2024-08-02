@@ -1,9 +1,7 @@
 package com.example.marshroute.database
 
 import android.content.Context
-import android.os.Bundle
 import android.util.Log
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -16,14 +14,15 @@ class DatabaseManager(context: Context) {
     }
 
     // Додати нову точку маршруту
-    fun addRoutePoint(name: String, city: String, address: String, client: String, description: String) {
+    fun addRoutePoint(name: String, city: String, address: String, client: String, description: String, coordinates: String) {
         Log.d(TAG, "addRoutePoint")
         val point = hashMapOf(
             "name" to name,
             "city" to city,
             "address" to address,
             "client" to client,
-            "description" to description
+            "description" to description,
+            "coordinates" to coordinates
         )
         collection.add(point)
             .addOnSuccessListener { documentReference ->
@@ -72,14 +71,15 @@ class DatabaseManager(context: Context) {
     }
 
     // Оновити точку маршруту
-    fun updateRoutePoint(id: String, name: String, city: String, address: String, client: String, description: String) {
+    fun updateRoutePoint(id: String, name: String, city: String, address: String, client: String, description: String, coordinates: String) {
         Log.d(TAG, "updateRoutePoint")
         val point = hashMapOf(
             "name" to name,
             "city" to city,
             "address" to address,
             "client" to client,
-            "description" to description
+            "description" to description,
+            "coordinates" to coordinates
         )
         collection.document(id).set(point)
             .addOnSuccessListener {
@@ -108,17 +108,21 @@ class DatabaseManager(context: Context) {
         val city: String = "",
         val address: String = "",
         val client: String = "",
-        val description: String = ""
+        val description: String = "",
+        val coordinates: String
     )
     {
         override fun toString(): String {
             var clienttemp: String = client
             var descriptiontemp: String = description
+            var addresstemp: String = address
             if (client.isNotEmpty()){ clienttemp = ", " + client }
             if (description.isNotEmpty()){ descriptiontemp = ", " + description }
+            if (address.isNotEmpty()){ addresstemp = ", " + address }
             Log.d("EditPointDetailsActivity", client.toString())
             Log.d("EditPointDetailsActivity", description.toString())
-            return "$name, $city, $address$clienttemp$descriptiontemp"
+            Log.d("EditPointDetailsActivity", address.toString())
+            return "$name, $city, $coordinates,$addresstemp$clienttemp$descriptiontemp"
         }
     }
 }

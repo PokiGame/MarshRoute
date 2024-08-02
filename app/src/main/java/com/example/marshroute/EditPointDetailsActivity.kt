@@ -14,6 +14,7 @@ class EditPointDetailsActivity : AppCompatActivity() {
     private lateinit var editTextAddress: EditText
     private lateinit var editTextClient: EditText
     private lateinit var editTextDescription: EditText
+    private lateinit var editTextCoordinates: EditText
     private lateinit var buttonSave: Button
     private lateinit var buttonDelete: Button
     private lateinit var dbManager: DatabaseManager
@@ -28,6 +29,7 @@ class EditPointDetailsActivity : AppCompatActivity() {
         editTextAddress = findViewById(R.id.editTextAddress)
         editTextClient = findViewById(R.id.editTextClient)
         editTextDescription = findViewById(R.id.editTextDescription)
+        editTextCoordinates = findViewById(R.id.editTextCoordinates)
         buttonSave = findViewById(R.id.buttonSave)
         buttonDelete = findViewById(R.id.buttonDelete)
 
@@ -41,6 +43,7 @@ class EditPointDetailsActivity : AppCompatActivity() {
                 editTextAddress.setText(it.address)
                 editTextClient.setText(it.client)
                 editTextDescription.setText(it.description)
+                editTextCoordinates.setText(it.coordinates)
             }
         }
 
@@ -50,8 +53,9 @@ class EditPointDetailsActivity : AppCompatActivity() {
             val address = editTextAddress.text.toString()
             val client = editTextClient.text.toString()
             val description = editTextDescription.text.toString()
+            val coordinates = editTextCoordinates.text.toString()
 
-            dbManager.updateRoutePoint(pointId, name, city, address, client, description)
+            dbManager.updateRoutePoint(pointId, name, city, address, client, description, coordinates)
             Toast.makeText(this, "Точка оновлена", Toast.LENGTH_SHORT).show()
             setResult(Activity.RESULT_OK)
             finish()

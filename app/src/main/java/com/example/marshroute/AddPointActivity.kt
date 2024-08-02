@@ -14,6 +14,7 @@ class AddPointActivity : AppCompatActivity() {
     private lateinit var editTextAddress: EditText
     private lateinit var editTextClient: EditText
     private lateinit var editTextDescription: EditText
+    private lateinit var editTextCoordinates: EditText
     private lateinit var buttonSave: Button
     private lateinit var dbManager: DatabaseManager
 
@@ -26,6 +27,7 @@ class AddPointActivity : AppCompatActivity() {
         editTextAddress = findViewById(R.id.editTextAddress)
         editTextClient = findViewById(R.id.editTextClient)
         editTextDescription = findViewById(R.id.editTextDescription)
+        editTextCoordinates = findViewById(R.id.editTextCoordinates)
         buttonSave = findViewById(R.id.buttonSave)
         dbManager = DatabaseManager(this)
 
@@ -36,9 +38,10 @@ class AddPointActivity : AppCompatActivity() {
             val address = editTextAddress.text.toString()
             val client = editTextClient.text.toString()
             val description = editTextDescription.text.toString()
+            val coordinates = editTextCoordinates.text.toString()
 
-            if (name.isNotEmpty() && address.isNotEmpty() && city.isNotEmpty()) {
-                dbManager.addRoutePoint(name, city, address, client, description)
+            if (name.isNotEmpty() && coordinates.isNotEmpty() && city.isNotEmpty()) {
+                dbManager.addRoutePoint(name, city, address, client, description, coordinates)
                 Toast.makeText(this, "Точка додана", Toast.LENGTH_SHORT).show()
                 finish()
             } else {

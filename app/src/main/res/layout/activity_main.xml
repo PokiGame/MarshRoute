@@ -28,7 +28,7 @@
         android:layout_marginTop="330dp"
         android:layout_marginEnd="116dp"
         android:layout_marginBottom="345dp"
-        android:text="Редагувати точки" />
+        android:text="@string/pointEditText" />
 
     <Button
         android:id="@+id/button_plan_route"
@@ -39,10 +39,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="117dp"
-        android:layout_marginTop="255dp"
+        android:layout_marginTop="256dp"
         android:layout_marginEnd="104dp"
         android:layout_marginBottom="428dp"
-        android:text="Проложити маршрут" />
+        android:text="@string/doMarshrouteText" />
 
     <!-- Button для додавання точок зі стилем круглої кнопки -->
     <Button
@@ -59,9 +59,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="17dp"
-        android:background="@drawable/round_button"
-        android:contentDescription="@string/add_button_description"
-        android:text="+" />
+
+        android:text="@string/pointAddText" />
 
 
 </RelativeLayout>
