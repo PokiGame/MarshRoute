@@ -68,4 +68,5 @@ class EditPointDetailsActivity : AppCompatActivity() {
             finish()
         }
     }
+
 }

@@ -17,7 +17,7 @@ class EditPointsActivity : AppCompatActivity() {
 
     private lateinit var listViewPoints: ListView
     private lateinit var dbManager: DatabaseManager
-    private lateinit var adapter: ArrayAdapter<DatabaseManager.Point> // Змінено на ArrayAdapter<DatabaseManager.Point>
+    private lateinit var adapter: ArrayAdapter<DatabaseManager.Point>
     private lateinit var editPointLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {

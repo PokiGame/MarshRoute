@@ -53,11 +53,12 @@ class DatabaseManager(context: Context) {
 
     // Отримати точку маршруту за ID
     fun getRoutePoint(id: String, onResult: (Point?) -> Unit) {
-        Log.d(TAG, "getRoutePoint")
+
         collection.document(id).get()
             .addOnSuccessListener { document ->
                 if (document != null) {
                     val point = document.toObject(Point::class.java)?.copy(id = document.id)
+                    Log.d(TAG, "getRoutePoint")
                     onResult(point)
                 } else {
                     Log.d(TAG, "No such document")

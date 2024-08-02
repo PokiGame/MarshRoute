@@ -22,6 +22,7 @@
         <activity android:name=".AddPointActivity" />
         <activity android:name=".EditPointsActivity" />
         <activity android:name=".PlanRouteActivity" />
+        <activity android:name=".LookPointDetailsActivity"/>
         <activity android:name=".SelectPointsActivity" />
         <activity android:name=".EditPointDetailsActivity" />
     </application>
