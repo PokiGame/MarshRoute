@@ -111,7 +111,9 @@ class DatabaseManager(context: Context) {
         val description: String = "",
         val coordinates: String
     )
+
     {
+        constructor() : this("", "", "", "", "", "", "")
         override fun toString(): String {
             var clienttemp: String = client
             var descriptiontemp: String = description
@@ -122,7 +124,7 @@ class DatabaseManager(context: Context) {
             Log.d("EditPointDetailsActivity", client.toString())
             Log.d("EditPointDetailsActivity", description.toString())
             Log.d("EditPointDetailsActivity", address.toString())
-            return "$name, $city, $coordinates,$addresstemp$clienttemp$descriptiontemp"
+            return "$name, $city, $coordinates$addresstemp$clienttemp$descriptiontemp"
         }
     }
 }
