@@ -41,11 +41,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        buttonEditPoints = findViewById(R.id.button_edit)
-        buttonEditPoints.setOnClickListener {
-            val intent = Intent(this, EditPointsActivity::class.java)
-            startActivity(intent)
-        }
+//        buttonEditPoints = findViewById(R.id.button_edit)
+//        buttonEditPoints.setOnClickListener {
+//            val intent = Intent(this, EditPointsActivity::class.java)
+//            startActivity(intent)
+//        }
 
         editPointLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {

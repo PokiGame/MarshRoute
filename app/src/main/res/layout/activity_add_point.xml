@@ -1,57 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <EditText
-        android:id="@+id/editTextName"
-        android:layout_width="match_parent"
-        android:layout_height="57dp"
-        android:autofillHints=""
-        android:hint="@string/pointNameText" />
-
-    <EditText
-        android:id="@+id/editTextCity"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="348dp"
         android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:hint="@string/cityNameText" />
-    <EditText
-        android:id="@+id/editTextCoordinates"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:hint="@string/coordinatesGoogleText" />
-
-    <EditText
-        android:id="@+id/editTextAddress"
-        android:layout_width="match_parent"
-        android:layout_height="57dp"
-        android:hint="@string/addressGoogleText"
-        android:autofillHints=""
-        android:textColor="@color/design_default_color_on_primary" />
+        android:text="Ім'я клієнта" />
 
     <EditText
         android:id="@+id/editTextClient"
-        android:layout_width="match_parent"
+        android:layout_width="348dp"
         android:layout_height="wrap_content"
         android:autofillHints=""
         android:hint="@string/clientNameText" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:text="Назва населеного пункту/міста" />
+
+
+    <EditText
+        android:id="@+id/editTextCity"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:hint="@string/cityNameText" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:text="Plus Code Google Maps" />
+
+    <EditText
+        android:id="@+id/editTextCoordinates"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:hint="@string/coordinatesGoogleText" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:text="Адреса, вулиця" />
+
+    <EditText
+        android:id="@+id/editTextAddress"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:hint="@string/addressGoogleText" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:text="Назва точки" />
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:hint="@string/pointNameText" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
+        android:text="Опис" />
+
     <EditText
         android:id="@+id/editTextDescription"
-        android:layout_width="match_parent"
-        android:layout_height="57dp"
+        android:layout_width="348dp"
+        android:layout_height="wrap_content"
         android:autofillHints=""
         android:hint="@string/descriptionText" />
 
     <Button
         android:id="@+id/buttonSave"
-        android:layout_width="221dp"
-        android:layout_height="59dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:autofillHints=""
         android:text="@string/saveText" />
+
 </LinearLayout>

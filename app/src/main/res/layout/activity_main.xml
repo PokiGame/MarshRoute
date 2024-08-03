@@ -2,44 +2,38 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#1e1e1e">
 
     <ListView
         android:id="@+id/listView_points"
         android:layout_width="match_parent"
-        android:layout_height="660dp" />
-
-    <Button
-        android:id="@+id/button_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="115dp"
-        android:layout_marginBottom="353dp"
-        android:text="@string/pointEditText" />
+        android:layout_height="640dp" />
 
     <Button
         android:id="@+id/button_plan_route"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/doMarshrouteText" />
+        android:contentDescription="@string/plan_marsh_route"
+        android:foreground="@drawable/round_button_marshroute" />
+
 
     <Button
         android:id="@+id/button_add"
-        android:layout_width="62dp"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="16dp"
-        android:layout_marginEnd="11dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="5dp"
-        android:text="@string/pointAddText" />
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/add_point"
+        android:foreground="@drawable/round_button_add" />
 
 
 </RelativeLayout>

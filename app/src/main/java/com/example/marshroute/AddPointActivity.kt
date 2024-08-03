@@ -40,12 +40,12 @@ class AddPointActivity : AppCompatActivity() {
             val description = editTextDescription.text.toString()
             val coordinates = editTextCoordinates.text.toString()
 
-            if (name.isNotEmpty() && coordinates.isNotEmpty() && city.isNotEmpty()) {
+            if (client.isNotEmpty() && coordinates.isNotEmpty() && city.isNotEmpty()) {
                 dbManager.addRoutePoint(name, city, address, client, description, coordinates)
                 Toast.makeText(this, "Точка додана", Toast.LENGTH_SHORT).show()
                 finish()
             } else {
-                Toast.makeText(this, "Назва, місто та адреса обовязкова!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Клієнт, місто та координати обовязково!", Toast.LENGTH_SHORT).show()
             }
         }
     }
