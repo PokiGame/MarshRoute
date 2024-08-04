@@ -1,5 +1,6 @@
 package com.example.marshroute
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -18,6 +19,8 @@ class AddPointActivity : AppCompatActivity() {
     private lateinit var buttonSave: Button
     private lateinit var dbManager: DatabaseManager
 
+    private val GEO_REQUEST_CODE = 1001
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_point)
@@ -31,6 +34,8 @@ class AddPointActivity : AppCompatActivity() {
         buttonSave = findViewById(R.id.buttonSave)
         dbManager = DatabaseManager(this)
 
+        // Запускаємо GeoposActivity автоматично при завантаженні AddPointActivity
+        startGeoposActivityForResult()
 
         buttonSave.setOnClickListener {
             val name = editTextName.text.toString()
@@ -45,8 +50,26 @@ class AddPointActivity : AppCompatActivity() {
                 Toast.makeText(this, "Точка додана", Toast.LENGTH_SHORT).show()
                 finish()
             } else {
-                Toast.makeText(this, "Клієнт, місто та координати обовязково!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Клієнт, місто та Plus Code обов'язково!", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun startGeoposActivityForResult() {
+        val intent = Intent(this, GeoposActivity::class.java)
+        startActivityForResult(intent, GEO_REQUEST_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == GEO_REQUEST_CODE && resultCode == RESULT_OK) {
+            val cityName = data?.getStringExtra("CITY_NAME") ?: "Not available"
+            val plusCode = data?.getStringExtra("PLUS_CODE") ?: "Not available"
+            val addressLine = data?.getStringExtra("ADDRESS_LINE") ?: "Not available"
+
+            editTextCity.setText(cityName)
+            editTextCoordinates.setText(plusCode)
+            editTextAddress.setText(addressLine)
         }
     }
 }
