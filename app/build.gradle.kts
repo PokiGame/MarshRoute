@@ -14,6 +14,7 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+        resValue("string", "google_maps_key", project.findProperty("MAPS_API_KEY") as String? ?: "")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

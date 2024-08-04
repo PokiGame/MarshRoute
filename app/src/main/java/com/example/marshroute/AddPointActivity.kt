@@ -19,8 +19,6 @@ class AddPointActivity : AppCompatActivity() {
     private lateinit var buttonSave: Button
     private lateinit var dbManager: DatabaseManager
 
-    private val GEO_REQUEST_CODE = 1001
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_point)
@@ -33,9 +31,6 @@ class AddPointActivity : AppCompatActivity() {
         editTextCoordinates = findViewById(R.id.editTextCoordinates)
         buttonSave = findViewById(R.id.buttonSave)
         dbManager = DatabaseManager(this)
-
-        // Запускаємо GeoposActivity автоматично при завантаженні AddPointActivity
-        startGeoposActivityForResult()
 
         buttonSave.setOnClickListener {
             val name = editTextName.text.toString()
@@ -53,23 +48,27 @@ class AddPointActivity : AppCompatActivity() {
                 Toast.makeText(this, "Клієнт, місто та Plus Code обов'язково!", Toast.LENGTH_SHORT).show()
             }
         }
-    }
 
-    private fun startGeoposActivityForResult() {
+        // Запускаємо GeoposActivity для отримання даних про точку
         val intent = Intent(this, GeoposActivity::class.java)
-        startActivityForResult(intent, GEO_REQUEST_CODE)
+        startActivityForResult(intent, REQUEST_CODE_GET_LOCATION)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == GEO_REQUEST_CODE && resultCode == RESULT_OK) {
-            val cityName = data?.getStringExtra("CITY_NAME") ?: "Not available"
-            val plusCode = data?.getStringExtra("PLUS_CODE") ?: "Not available"
-            val addressLine = data?.getStringExtra("ADDRESS_LINE") ?: "Not available"
+        if (requestCode == REQUEST_CODE_GET_LOCATION && resultCode == RESULT_OK) {
+            val cityName = data?.getStringExtra("CITY_NAME") ?: ""
+            val adminArea = data?.getStringExtra("ADMIN_AREA") ?: ""
+            val plusCode = data?.getStringExtra("PLUS_CODE") ?: ""
+            val addressLine = data?.getStringExtra("ADDRESS_LINE") ?: ""
 
             editTextCity.setText(cityName)
-            editTextCoordinates.setText(plusCode)
             editTextAddress.setText(addressLine)
+            editTextCoordinates.setText(plusCode)
         }
+    }
+
+    companion object {
+        private const val REQUEST_CODE_GET_LOCATION = 1
     }
 }

@@ -80,15 +80,37 @@ class GeoposActivity : AppCompatActivity() {
                 }
 
                 val address = addressList?.firstOrNull()
-
-                val cityName = address?.locality ?: ""
                 val plusCode = getPlusCode(latLng)
                 val addressLine = address?.getAddressLine(0) ?: ""
+                val locality = address?.locality ?: ""
+                val adminArea = address?.adminArea ?: ""
+
+                // Форматування адреси
+                val formattedPlusCode = buildString {
+                    append(plusCode) // Додаємо Plus Code
+                        if (locality.isNotEmpty()) {
+                            append(" ")
+                            append(locality) // Додаємо населений пункт
+                        }
+                        if (adminArea.isNotEmpty()) {
+                            append(", ")
+                            append(adminArea) // Додаємо область
+
+                    }
+                }
+                val formattedAddressLine = buildString {
+                    val tempAddressArray = addressLine.split(", ")
+                    append(tempAddressArray[0])
+                    if (tempAddressArray[1].all { it.isDigit() }){
+                        append(", " + tempAddressArray[1])
+                    }
+                }
 
                 val resultIntent = Intent().apply {
-                    putExtra("CITY_NAME", cityName)
-                    putExtra("PLUS_CODE", plusCode)
-                    putExtra("ADDRESS_LINE", addressLine)
+                    putExtra("CITY_NAME", locality)
+                    putExtra("ADMIN_AREA", adminArea)
+                    putExtra("PLUS_CODE", formattedPlusCode) // Використовуємо форматований Plus Code
+                    putExtra("ADDRESS_LINE", formattedAddressLine)
                 }
                 setResult(RESULT_OK, resultIntent)
                 finish()
@@ -97,6 +119,7 @@ class GeoposActivity : AppCompatActivity() {
             showToast("No Internet connection")
         }
     }
+
 
     private fun isNetworkAvailable(): Boolean {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
