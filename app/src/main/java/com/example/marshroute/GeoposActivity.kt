@@ -117,6 +117,7 @@ class GeoposActivity : AppCompatActivity() {
             }
         } else {
             showToast("No Internet connection")
+            finish()
         }
     }
 
