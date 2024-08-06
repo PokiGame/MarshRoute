@@ -17,9 +17,13 @@ playServicesLocation = "21.3.0"
 playServicesMaps = "19.0.0"
 volley = "1.2.1"
 places = "3.5.0"
+retrofit = "2.9.0"
+gson = "2.9.0"
 
 [libraries]
 
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "gson" }
 android-maps-utils = { module = "com.google.maps.android:android-maps-utils", version.ref = "androidMapsUtils" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

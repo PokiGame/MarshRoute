@@ -11,7 +11,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.marshroute.database.DatabaseManager
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.FirebaseApp
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -22,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var dbManager: DatabaseManager
     private lateinit var adapter: ArrayAdapter<DatabaseManager.Point>
     private lateinit var buttonAddPoint: Button
-    private lateinit var buttonEditPoints: Button
+    private lateinit var buttonPlanRoute: Button
     private lateinit var editPointLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,20 +32,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         dbManager = DatabaseManager(this)
         listViewPoints = findViewById(R.id.listView_points)
-
-
         buttonAddPoint = findViewById(R.id.button_add)
+        buttonPlanRoute = findViewById(R.id.button_plan_route) // Ініціалізуємо кнопку для планування маршруту
+
         buttonAddPoint.setOnClickListener {
             val intent = Intent(this, AddPointActivity::class.java)
             startActivity(intent)
         }
 
+        buttonPlanRoute.setOnClickListener {
+            val intent = Intent(this, PlanRouteActivity::class.java)
+            startActivity(intent)
+        }
 
         editPointLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 refreshPointsList()
             }
         }
+
         refreshPointsList()
 
         listViewPoints.setOnItemClickListener { _, _, position, _ ->
@@ -64,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         refreshPointsList()
     }
+
     private fun refreshPointsList() {
         dbManager.getAllRoutePoints { points ->
             // Оновлюємо адаптер
