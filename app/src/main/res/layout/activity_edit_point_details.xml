@@ -98,4 +98,11 @@
         android:autofillHints=""
         android:text="@string/deleteText" />
 
+    <Button
+        android:id="@+id/buttonSelectLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Вибрати місце на карті" />
+
+
 </LinearLayout>

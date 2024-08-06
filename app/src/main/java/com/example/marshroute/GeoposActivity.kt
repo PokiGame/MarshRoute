@@ -15,7 +15,12 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.openlocationcode.OpenLocationCode
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -24,26 +29,43 @@ import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.util.*
 
-class GeoposActivity : AppCompatActivity() {
+class GeoposActivity : AppCompatActivity(), OnMapReadyCallback {
 
+    private lateinit var map: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var manualSelection = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_geopos_get)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        manualSelection = intent.getBooleanExtra("MANUAL_SELECTION", false)
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED) {
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
         } else {
             getLocationAndUpdateUI()
         }
+
+        if (manualSelection) {
+            map.setOnMapClickListener { latLng ->
+                map.clear()
+                map.addMarker(MarkerOptions().position(latLng).title("Вибрана точка"))
+                getPlusCodeAndAddress(latLng)
+            }
+        }
     }
 
     private fun getLocationAndUpdateUI() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Log.e(TAG, "Location permission not granted")
             return
         }
@@ -52,7 +74,10 @@ class GeoposActivity : AppCompatActivity() {
             location?.let {
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 Log.d(TAG, "Location obtained: $currentLatLng")
-                getPlusCodeAndAddress(currentLatLng)
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f))
+                if (!manualSelection) {
+                    getPlusCodeAndAddress(currentLatLng)
+                }
             } ?: run {
                 Log.e(TAG, "Location is null")
             }
@@ -88,20 +113,19 @@ class GeoposActivity : AppCompatActivity() {
                 // Форматування адреси
                 val formattedPlusCode = buildString {
                     append(plusCode) // Додаємо Plus Code
-                        if (locality.isNotEmpty()) {
-                            append(" ")
-                            append(locality) // Додаємо населений пункт
-                        }
-                        if (adminArea.isNotEmpty()) {
-                            append(", ")
-                            append(adminArea) // Додаємо область
-
+                    if (locality.isNotEmpty()) {
+                        append(" ")
+                        append(locality) // Додаємо населений пункт
+                    }
+                    if (adminArea.isNotEmpty()) {
+                        append(", ")
+                        append(adminArea) // Додаємо область
                     }
                 }
                 val formattedAddressLine = buildString {
                     val tempAddressArray = addressLine.split(", ")
                     append(tempAddressArray[0])
-                    if (tempAddressArray[1].all { it.isDigit() }){
+                    if (tempAddressArray.size > 1 && tempAddressArray[1].all { it.isDigit() }){
                         append(", " + tempAddressArray[1])
                     }
                 }
@@ -121,7 +145,6 @@ class GeoposActivity : AppCompatActivity() {
         }
     }
 
-
     private fun isNetworkAvailable(): Boolean {
         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkCapabilities = connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
@@ -135,7 +158,6 @@ class GeoposActivity : AppCompatActivity() {
             Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         }
     }
-
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)

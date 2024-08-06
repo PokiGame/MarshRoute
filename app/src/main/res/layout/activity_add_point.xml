@@ -91,6 +91,16 @@
         android:autofillHints=""
         android:text="@string/saveText" />
 
+    <Button
+        android:id="@+id/buttonSetPointManually"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Встановити точку вручну"
+        android:layout_below="@id/buttonSave"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true" />
+
+
 
 
 </LinearLayout>
